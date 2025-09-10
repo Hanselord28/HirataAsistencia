@@ -1,0 +1,50 @@
+-- CREAR BASE DE DATOS
+CREATE DATABASE IF NOT EXISTS controlasistencia
+  DEFAULT CHARACTER SET utf8mb4
+  COLLATE utf8mb4_general_ci;
+
+USE controlasistencia;
+
+-- TABLA USUARIOS
+CREATE TABLE usuarios (
+  IdUsuario INT(11) NOT NULL AUTO_INCREMENT,
+  NombreCompleto VARCHAR(100) NOT NULL,
+  Correo VARCHAR(100) NOT NULL UNIQUE,
+  Contrasena VARCHAR(255) NOT NULL,
+  Rol VARCHAR(20) DEFAULT NULL,
+  FechaCreacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (IdUsuario)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- TABLA ASISTENCIAS
+CREATE TABLE asistencias (
+  IdAsistencia INT(11) NOT NULL AUTO_INCREMENT,
+  IdUsuario INT(11) NOT NULL,
+  Fecha DATE NOT NULL,
+  HoraEntrada TIME DEFAULT NULL,
+  HoraSalida TIME DEFAULT NULL,
+  PRIMARY KEY (IdAsistencia),
+  UNIQUE KEY (IdUsuario, Fecha),
+  CONSTRAINT fk_asistencias_usuario FOREIGN KEY (IdUsuario) REFERENCES usuarios(IdUsuario)
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- DATOS DE USUARIOS
+INSERT INTO usuarios (IdUsuario, NombreCompleto, Correo, Contrasena, Rol, FechaCreacion) VALUES
+(2, 'Maria Gonzalez', 'maria.gonzalez@example.com', 'abc123', 'Empleado', '2025-08-27 14:01:40'),
+(3, 'Carlos Lopez', 'carlos.lopez@example.com', 'qwerty', 'Administrador', '2025-08-27 14:01:40'),
+(4, 'Ana Torres', 'ana.torres@example.com', 'password', 'Empleado', '2025-08-27 14:01:40'),
+(5, 'Luis Ramirez', 'luis.ramirez@example.com', 'admin2025', 'Administrador', '2025-08-27 14:01:40'),
+(6, 'feña', 'correo@correo', '123', 'Empleado', '2025-08-31 04:00:00'),
+(7, 'hansel', 'correo2@correo', '1234', 'Empleado', '2025-08-31 04:00:00'),
+(8, 'lolololol', 'correo3@correo3', '12345', 'Administrador', '2025-08-31 04:00:00');
+
+-- DATOS DE ASISTENCIAS
+INSERT INTO asistencias (IdAsistencia, IdUsuario, Fecha, HoraEntrada, HoraSalida) VALUES
+(2, 2, '2025-08-25', '08:15:00', '17:10:00'),
+(3, 3, '2025-08-25', '07:55:00', '16:45:00'),
+(4, 4, '2025-08-25', '08:20:00', '17:05:00'),
+(5, 5, '2025-08-25', '09:00:00', '18:00:00'),
+(6, 6, '2025-09-02', '18:39:00', '18:39:22'),
+(7, 7, '2025-09-02', '18:45:15', '18:45:40'),
+(8, 6, '2025-09-03', '11:40:19', '11:40:33');
