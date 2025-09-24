@@ -14,6 +14,10 @@ import model.Usuario;
 import java.sql.SQLException;
 import model.Asistencia;
 import model.ReporteAsistenciaPDF;
+import com.toedter.calendar.JDateChooser;
+import java.text.SimpleDateFormat;
+import javax.swing.JTextField;
+
 
 /**
  *
@@ -21,12 +25,15 @@ import model.ReporteAsistenciaPDF;
  */
 public class GestionTrabajadores extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GestionTrabajadores
-     */
+    private JDateChooser selectorFecha;
+    //private JTextField txtFechaCreacion;
+    
+//    jdcFechaCreacion.setDateFormatString("yyyy-MM-dd");
+    
+    
     public GestionTrabajadores() {
         initComponents();
-        cargarComboIds();
+        cargarComboIds();  
     }
 
     private void cargarComboIds() {
@@ -44,6 +51,11 @@ public class GestionTrabajadores extends javax.swing.JFrame {
         }
     }
 
+    
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -68,9 +80,9 @@ public class GestionTrabajadores extends javax.swing.JFrame {
         txtCorreoTrabajador = new javax.swing.JTextField();
         cbbRolTrabajador = new javax.swing.JComboBox<>();
         lblFechaCreacion = new javax.swing.JLabel();
-        txtFechaCreacion = new javax.swing.JTextField();
         btnCancelarRegistro = new javax.swing.JButton();
         btnAgregarRegistro = new javax.swing.JButton();
+        txtFechaCreacion = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -84,12 +96,12 @@ public class GestionTrabajadores extends javax.swing.JFrame {
         cbbModificarRol = new javax.swing.JComboBox<>();
         lblModificarRol = new javax.swing.JLabel();
         lblModificarFechaCreacion = new javax.swing.JLabel();
-        txtModificarFechaCreacion = new javax.swing.JTextField();
         btnCancelarUpdate = new javax.swing.JButton();
         btnAgregarUpdate = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
         lblidTrabajador = new javax.swing.JLabel();
         cbbidTrabajador = new javax.swing.JComboBox<>();
+        txtModificarFechaCreacion = new com.toedter.calendar.JDateChooser();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -116,6 +128,7 @@ public class GestionTrabajadores extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1350, 720));
 
         pnlTitulo.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -194,13 +207,6 @@ public class GestionTrabajadores extends javax.swing.JFrame {
         lblFechaCreacion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblFechaCreacion.setText("Fecha de Creación");
 
-        txtFechaCreacion.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
-        txtFechaCreacion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtFechaCreacionMouseClicked(evt);
-            }
-        });
-
         btnCancelarRegistro.setBackground(new java.awt.Color(204, 0, 51));
         btnCancelarRegistro.setFont(new java.awt.Font("MS UI Gothic", 1, 14)); // NOI18N
         btnCancelarRegistro.setForeground(new java.awt.Color(255, 255, 255));
@@ -223,29 +229,32 @@ public class GestionTrabajadores extends javax.swing.JFrame {
             }
         });
 
+        txtFechaCreacion.setDateFormatString("yyyy-MM-dd");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jSeparator1)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombreTrabajador)
-                            .addComponent(txtContraseñaTrabajador)
-                            .addComponent(lblNombreTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblContraseñaTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCancelarRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(36, 36, 36)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblCorreoTrabajador)
-                            .addComponent(txtCorreoTrabajador)
-                            .addComponent(lblRolTrabajador)
-                            .addComponent(cbbRolTrabajador, 0, 263, Short.MAX_VALUE)
-                            .addComponent(btnAgregarRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(lblFechaCreacion)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jSeparator1)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtNombreTrabajador)
+                                .addComponent(txtContraseñaTrabajador)
+                                .addComponent(lblNombreTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblContraseñaTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCancelarRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGap(36, 36, 36)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblCorreoTrabajador)
+                                .addComponent(txtCorreoTrabajador)
+                                .addComponent(lblRolTrabajador)
+                                .addComponent(cbbRolTrabajador, 0, 263, Short.MAX_VALUE)
+                                .addComponent(btnAgregarRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(lblFechaCreacion))
                     .addComponent(txtFechaCreacion, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -277,8 +286,8 @@ public class GestionTrabajadores extends javax.swing.JFrame {
                             .addComponent(cbbRolTrabajador))
                         .addGap(28, 28, 28)
                         .addComponent(lblFechaCreacion, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(txtFechaCreacion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFechaCreacion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnAgregarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -318,6 +327,11 @@ public class GestionTrabajadores extends javax.swing.JFrame {
         lblModificarNombreTrabajador.setText("Nombre/Apellido Trabajador");
 
         txtModificarNombreTrabajador.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
+        txtModificarNombreTrabajador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtModificarNombreTrabajadorActionPerformed(evt);
+            }
+        });
         txtModificarNombreTrabajador.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtModificarNombreTrabajadorKeyTyped(evt);
@@ -361,13 +375,6 @@ public class GestionTrabajadores extends javax.swing.JFrame {
         lblModificarFechaCreacion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblModificarFechaCreacion.setText("Fecha de Creación");
 
-        txtModificarFechaCreacion.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
-        txtModificarFechaCreacion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtModificarFechaCreacionMouseClicked(evt);
-            }
-        });
-
         btnCancelarUpdate.setBackground(new java.awt.Color(204, 0, 51));
         btnCancelarUpdate.setFont(new java.awt.Font("MS UI Gothic", 1, 14)); // NOI18N
         btnCancelarUpdate.setForeground(new java.awt.Color(255, 255, 255));
@@ -402,6 +409,8 @@ public class GestionTrabajadores extends javax.swing.JFrame {
 
         cbbidTrabajador.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
 
+        txtModificarFechaCreacion.setDateFormatString("yyyy-MM-dd");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -416,11 +425,11 @@ public class GestionTrabajadores extends javax.swing.JFrame {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnCancelarUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                             .addComponent(lblModificarFechaCreacion)
-                            .addComponent(txtModificarFechaCreacion, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                             .addComponent(txtModificarContrasenaTrabajador)
                             .addComponent(lblModificarContrasenaTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                             .addComponent(lblidTrabajador)
-                            .addComponent(cbbidTrabajador, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(cbbidTrabajador, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtModificarFechaCreacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(36, 36, 36)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -458,8 +467,8 @@ public class GestionTrabajadores extends javax.swing.JFrame {
                                 .addComponent(txtModificarContrasenaTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(28, 28, 28)
                                 .addComponent(lblModificarFechaCreacion, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2)
-                                .addComponent(txtModificarFechaCreacion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtModificarFechaCreacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addComponent(lblModificarCorreoTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -787,7 +796,7 @@ public class GestionTrabajadores extends javax.swing.JFrame {
                 .addComponent(lblLogoTH)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlTituloLayout.setVerticalGroup(
@@ -801,20 +810,20 @@ public class GestionTrabajadores extends javax.swing.JFrame {
                     .addGroup(pnlTituloLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(587, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 94, Short.MAX_VALUE)
+                .addComponent(pnlTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(pnlTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pnlTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -861,9 +870,12 @@ public class GestionTrabajadores extends javax.swing.JFrame {
             usuario.setCorreo(txtModificarCorreoTrabajador.getText());
             usuario.setContrasena(txtModificarContrasenaTrabajador.getText());
             usuario.setRol(cbbModificarRol.getSelectedItem().toString());
+            
+            
+            
 
             // Fecha
-            java.util.Date fecha = java.sql.Date.valueOf(txtModificarFechaCreacion.getText()); // formato yyyy-MM-dd
+            java.util.Date fecha = txtModificarFechaCreacion.getDate(); // formato yyyy-MM-dd
             usuario.setFechaCreacion(fecha);
 
             DAO_Usuarios dao = new DAO_Usuarios();
@@ -881,14 +893,10 @@ public class GestionTrabajadores extends javax.swing.JFrame {
         txtModificarCorreoTrabajador.setText("");
         txtModificarContrasenaTrabajador.setText("");
         cbbModificarRol.setSelectedIndex(0);
-        txtFechaCreacion.setText("");
+        txtFechaCreacion.setDate(null);
         cbbidTrabajador.setSelectedIndex(0);
         cargarComboIds();
     }//GEN-LAST:event_btnCancelarUpdateActionPerformed
-
-    private void txtModificarFechaCreacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificarFechaCreacionMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtModificarFechaCreacionMouseClicked
 
     private void txtModificarContrasenaTrabajadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificarContrasenaTrabajadorMouseClicked
         // TODO add your handling code here:
@@ -899,7 +907,11 @@ public class GestionTrabajadores extends javax.swing.JFrame {
     }//GEN-LAST:event_txtModificarCorreoTrabajadorKeyTyped
 
     private void txtModificarNombreTrabajadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtModificarNombreTrabajadorKeyTyped
-        // TODO add your handling code here:
+         char c = evt.getKeyChar();
+
+        if (!Character.isLetter(c) && c != ' ' && c != '\b') { // Permite letras, espacio y tecla borrar
+            evt.consume(); // Bloquea la entrada del carácter
+        }
     }//GEN-LAST:event_txtModificarNombreTrabajadorKeyTyped
 
     private void btnAgregarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarRegistroActionPerformed
@@ -911,7 +923,7 @@ public class GestionTrabajadores extends javax.swing.JFrame {
             nuevoUsuario.setRol(cbbRolTrabajador.getSelectedItem().toString());
 
             // Si usas JTextField para fecha
-            java.util.Date fecha = java.sql.Date.valueOf(txtFechaCreacion.getText()); // formato: yyyy-MM-dd
+            java.util.Date fecha = txtFechaCreacion.getDate();
             nuevoUsuario.setFechaCreacion(fecha);
 
             DAO_Usuarios dao = new DAO_Usuarios();
@@ -929,12 +941,8 @@ public class GestionTrabajadores extends javax.swing.JFrame {
         txtCorreoTrabajador.setText("");
         txtContraseñaTrabajador.setText("");
         cbbRolTrabajador.setSelectedIndex(0); // Selecciona la primera opción del combo
-        txtFechaCreacion.setText(""); // O si usas JDateChooser: dateChooser.setDate(null);
+        txtFechaCreacion.setDate(null); // O si usas JDateChooser: dateChooser.setDate(null);
     }//GEN-LAST:event_btnCancelarRegistroActionPerformed
-
-    private void txtFechaCreacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFechaCreacionMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFechaCreacionMouseClicked
 
     private void txtCorreoTrabajadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoTrabajadorKeyTyped
         // TODO add your handling code here:
@@ -1023,6 +1031,10 @@ public class GestionTrabajadores extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnReporteSalidaAnticipadaActionPerformed
 
+    private void txtModificarNombreTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModificarNombreTrabajadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtModificarNombreTrabajadorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1104,10 +1116,10 @@ public class GestionTrabajadores extends javax.swing.JFrame {
     private javax.swing.JTable tblModProveedor;
     private javax.swing.JTextField txtContraseñaTrabajador;
     private javax.swing.JTextField txtCorreoTrabajador;
-    private javax.swing.JTextField txtFechaCreacion;
+    private com.toedter.calendar.JDateChooser txtFechaCreacion;
     private javax.swing.JTextField txtModificarContrasenaTrabajador;
     private javax.swing.JTextField txtModificarCorreoTrabajador;
-    private javax.swing.JTextField txtModificarFechaCreacion;
+    private com.toedter.calendar.JDateChooser txtModificarFechaCreacion;
     private javax.swing.JTextField txtModificarNombreTrabajador;
     private javax.swing.JTextField txtNombreTrabajador;
     // End of variables declaration//GEN-END:variables
